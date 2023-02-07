@@ -12,6 +12,7 @@
 
 body {
     height: 100vh;
+    background-color: #B5D5C5;
 }
 
 .container {
@@ -25,18 +26,21 @@ body {
 .etch__border {
     border: 130px solid #FD8A8A;
     border-radius: 1rem;
-    width: 55%;
-
+    width: 45%;
+    display: flex;
+    flex-direction: column;
 }
 .etch__heading {
     position: absolute;
     font-family: var(--font-family);
     font-size: 48px;
-    top: 14rem;
+    top: 1.2rem;
+    padding-top: 8rem;
+    align-self: center;
     color: #F1F7B8;
 }
 .etch__main {
-    height: 50vh;
+    min-height: 50vh;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
 }
@@ -47,4 +51,37 @@ body {
 
 .active {
     background-color: var(--clr-primary-400);
+}
+
+.left-button, .right-button {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 10em;
+    position: absolute;
+    bottom: 9rem;
+}
+
+.left-button {
+    left: 23%;
+}
+
+.right-button {
+    right: 23%;
+}
+.buttons {
+    position: absolute;
+    bottom: 8rem;
+    align-self: center;
+    display: flex;
+    gap: 1rem;
+}
+
+.buttons > button {
+   
+    border: none;
+    padding: .4rem;
+    font-size: 12px;
+    color: var(--clr-primary-400);
+    border-radius: .8rem;;
 }
