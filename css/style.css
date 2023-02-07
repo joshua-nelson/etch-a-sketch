@@ -1,0 +1,50 @@
+:root {
+    --font-family: 'Solitreo', cursive;
+
+    --clr-primary-400: #797A7E;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.etch__border {
+    border: 130px solid #FD8A8A;
+    border-radius: 1rem;
+    width: 55%;
+
+}
+.etch__heading {
+    position: absolute;
+    font-family: var(--font-family);
+    font-size: 48px;
+    top: 14rem;
+    color: #F1F7B8;
+}
+.etch__main {
+    height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+}
+
+.grid {
+    background-color: #DDDDDD;
+}
+
+.active {
+    background-color: var(--clr-primary-400);
+}
