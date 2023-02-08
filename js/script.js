@@ -1,7 +1,8 @@
 const container = document.querySelector('.etch__main');
 const resetBtn = document.querySelector('.reset');
+const rainbowBtn = document.querySelector('.rainbow');
 
-Boolean 
+let isRainbow = false;
 
 function createGrid() {
     for (i = 1; i <= 256; i ++) {
@@ -11,15 +12,12 @@ function createGrid() {
     }
 }
 function reset() {
-    console.log(grid);
+
     grid.forEach(e => {
-        if (e.classList.contains('active')) {
-            e.classList.remove('active');
-            
-        } else {
-            e.style.backgroundColor = "#DDDDDD";
-        }
-        
+
+        e.classList.remove('active');
+        e.style.backgroundColor = null;
+       
     } );
 }
 
@@ -27,6 +25,10 @@ function randomInteger(max) {
     
     return Math.floor(Math.random() * (max + 1) );
 
+}
+
+function switchColor() {
+    isRainbow = !isRainbow;
 }
 
 function randomRgb() {
@@ -42,14 +44,32 @@ createGrid();
 const grid = Array.from(document.querySelectorAll('div.grid'));
 grid.forEach(element => {
     element.addEventListener('mouseenter', function(e) {
-        //e.target.classList.add('active');
         const rgb = randomRgb()
-        e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]}, ${rgb[2]})`;
+
+        if(isRainbow) {
+            e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]}, ${rgb[2]})`;
+        } else if(!isRainbow) {
+            e.target.classList.add('active');
+        }
+        
+        
     });
 });
 
 resetBtn.addEventListener('click', function(){
     reset();
 });
+
+rainbowBtn.addEventListener('click', function(){
+    reset();
+    if(!isRainbow) {
+    switchColor();
+    rainbowBtn.style.backgroundColor = '#F1F7B8';
+    } else if (isRainbow) {
+        rainbowBtn.style.backgroundColor = 'white';
+        switchColor();
+    }
+   
+})
 
 
