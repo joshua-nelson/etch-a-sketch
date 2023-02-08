@@ -31,10 +31,10 @@ body {
     flex-direction: column;
 }
 .etch__heading {
-    position: absolute;
+ 
     font-family: var(--font-family);
-    font-size: 48px;
-    top: 1.2rem;
+    font-size: 68px;
+    top: rem;
     padding-top: 8rem;
     align-self: center;
     color: #F1F7B8;
@@ -42,7 +42,6 @@ body {
 .etch__main {
     min-height: 50vh;
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
 }
 
 .grid {

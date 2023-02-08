@@ -1,18 +1,43 @@
 const container = document.querySelector('.etch__main');
-const resetBtn = document.querySelector('.reset');
+const resetColorBtn = document.querySelector('.reset');
 const rainbowBtn = document.querySelector('.rainbow');
+const gridSizeBtn = document.querySelector('#gridSize');
 
 let isRainbow = false;
+let gridValue = 64;
+let gridSize = Math.pow(gridValue, 2);
+let gridArray;
 
 function createGrid() {
-    for (i = 1; i <= 256; i ++) {
+    if(gridValue > 64) {
+        gridValue = 64;
+        alert("Grid value too high. Maximum is 64");
+    } 
+
+    for (i = 1; i <= gridSize; i ++) {
         const grid = document.createElement('div');
         grid.classList.add('grid');
         container.appendChild(grid);
+        
     }
+ 
+    container.style.gridTemplateColumns = `repeat(${gridValue}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${gridValue}, 1fr)`;
+    createGridEvents();
 }
-function reset() {
 
+function resetGrid() {
+    let gridList = Array.from(document.querySelectorAll('.grid')); 
+    gridList.forEach(e => {
+        e.remove();
+    });
+    createGrid();
+}
+
+
+
+function resetColor() {
+    const grid = Array.from(document.querySelectorAll('div.grid'));
     grid.forEach(e => {
 
         e.classList.remove('active');
@@ -20,6 +45,8 @@ function reset() {
        
     } );
 }
+
+
 
 function randomInteger(max) {
     
@@ -41,27 +68,31 @@ function randomRgb() {
 
 createGrid();
 
-const grid = Array.from(document.querySelectorAll('div.grid'));
-grid.forEach(element => {
-    element.addEventListener('mouseenter', function(e) {
-        const rgb = randomRgb()
-
-        if(isRainbow) {
-            e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]}, ${rgb[2]})`;
-        } else if(!isRainbow) {
-            e.target.classList.add('active');
-        }
-        
-        
+function createGridEvents() {
+    const grid = Array.from(document.querySelectorAll('div.grid'));
+    grid.forEach(element => {
+        element.addEventListener('mouseenter', function(e) {
+            const rgb = randomRgb()
+    
+            if(isRainbow) {
+                e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]}, ${rgb[2]})`;
+            } else if(!isRainbow) {
+                e.target.classList.add('active');
+            }
+            
+            
+        });
     });
-});
+}
 
-resetBtn.addEventListener('click', function(){
-    reset();
+
+
+resetColorBtn.addEventListener('click', function(){
+    resetColor();
 });
 
 rainbowBtn.addEventListener('click', function(){
-    reset();
+    resetColor();
     if(!isRainbow) {
     switchColor();
     rainbowBtn.style.backgroundColor = '#F1F7B8';
@@ -71,5 +102,10 @@ rainbowBtn.addEventListener('click', function(){
     }
    
 })
+
+gridSizeBtn.addEventListener('click', function(e){
+    gridValue = prompt("Enter a value for the grid size.");
+    resetGrid();
+});
 
 
